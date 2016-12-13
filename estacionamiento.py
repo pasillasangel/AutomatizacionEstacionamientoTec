@@ -88,7 +88,7 @@ def pantallaSecundaria():
 	print "\t\t\t\t\t  \_/\___|\___| "
 	print "\n\t########################################################################################"
 	print "\t\t*******************************************************************"
-	print "\t\t*  1.- Ingresar un profesor al estacionamiento                    *"
+	print "\t\t*  1.- Ingresar un profesor al estacionamiento.                   *"
 	print "\t\t*******************************************************************"
 	print "\t\t*  2.- Elimnar profesor del estacionamiento.                      *"
 	print "\t\t*******************************************************************"
@@ -187,7 +187,7 @@ def ingresarProfesor():
 		variable = raw_input("\n\n\tPresione en <ENTER> para continuar...")
 	else:
 		# Verificar si existe esa matricual (Profesor)
-		querybuscarMaestro = "SELECT Nombre, ApellidoPaterno FROM PROFESOR WHERE Matricula = %d" % Matricula
+		querybuscarMaestro = "SELECT Nombre, ApellidoPaterno FROM PROFESOR WHERE Matricula = %s" % Matricula
 		# Ejecutamos la instruccion
 		runQueryIngresarMaestro = run_query(querybuscarMaestro)
 		# Si no la encuentra...
@@ -198,7 +198,7 @@ def ingresarProfesor():
 			variable =  raw_input("\n\n\tPresione en <ENTER> para continuar...")
 		else:
 			# Buscar la misma Matricula
-			queryBuscarDuplicado = "SELECT IdMatriculaOcupado FROM LUGAROCUPADO WHERE IdMatriculaOcupado = %d" % Matricula
+			queryBuscarDuplicado = "SELECT IdMatriculaOcupado FROM LUGAROCUPADO WHERE IdMatriculaOcupado = %s" % Matricula
 			# Correr la instruccion de arriba
 			runMatriculaRepetida = run_query(queryBuscarDuplicado)
 			# Si la encuentro...
@@ -209,7 +209,7 @@ def ingresarProfesor():
 				variable =  raw_input("\n\n\tPresione en <ENTER> para continuar...")
 			else:
 				# Ingresar el profesor en tabla de Ocupados
-				queryIngresarMaestro = "INSERT INTO LUGAROCUPADO (IdMatriculaOcupado) VALUES (%d)" % Matricula
+				queryIngresarMaestro = "INSERT INTO LUGAROCUPADO (IdMatriculaOcupado) VALUES (%s)" % Matricula
 				# Correr la instruccion de arriba
 				run_query(queryIngresarMaestro)
 				# Restar uno al tabla LugaresDisponibles
@@ -240,7 +240,7 @@ def eliminarProfesor():
 		variable =  raw_input("\n\n\tPresione en <ENTER> para continuar...")
 	else:
 		# Verificar si existe esa matricual (Profesor)
-		querybuscarMaestro = "SELECT Nombre, ApellidoPaterno FROM PROFESOR WHERE Matricula = %d" % Matricula
+		querybuscarMaestro = "SELECT Nombre, ApellidoPaterno FROM PROFESOR WHERE Matricula = %s" % Matricula
 		# Ejecutamos la instruccion
 		runQueryIngresarMaestro = run_query(querybuscarMaestro)
 		# Si no la encuentra...
@@ -251,7 +251,7 @@ def eliminarProfesor():
 			variable =  raw_input("\n\n\tPresione en <ENTER> para continuar...")
 		else:
 			# Buscar la misma Matricula
-			queryBuscarDuplicado = "SELECT IdMatriculaOcupado, Entr FROM LUGAROCUPADO WHERE IdMatriculaOcupado = %d" % Matricula
+			queryBuscarDuplicado = "SELECT IdMatriculaOcupado, Entr FROM LUGAROCUPADO WHERE IdMatriculaOcupado = %s" % Matricula
 			# Correr la instruccion de arriba
 			runMatriculaRepetida = run_query(queryBuscarDuplicado)
 			# Si no la encuentra...
@@ -262,7 +262,7 @@ def eliminarProfesor():
 				variable =  raw_input("\n\n\tPresione en <ENTER> para continuar...")
 			else:
 				# Ingresar el profesor en tabla de Ocupados
-				queryIngresarMaestro = "DELETE FROM LUGAROCUPADO WHERE IdMatriculaOcupado = (%d)" % Matricula
+				queryIngresarMaestro = "DELETE FROM LUGAROCUPADO WHERE IdMatriculaOcupado = (%s)" % Matricula
 				# Correr la instruccion de arriba
 				run_query(queryIngresarMaestro)
 				# Suma uno al tabla LugaresDisponibles

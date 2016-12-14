@@ -33,7 +33,7 @@ import MySQLdb  #Permite la conexion de base de datos
 DB_HOST = 'localhost' 
 DB_USER = 'root' 
 DB_PASS = '' 
-DB_NAME = 'EstacionamientoTec11' # <<<------- Modificar Base de datos
+DB_NAME = 'EstacionamientoTec13' # <<<------- Modificar Base de datos
  
 def run_query(query=''): 
 	datos = [DB_HOST, DB_USER, DB_PASS, DB_NAME] 
@@ -169,6 +169,8 @@ def iniciadoSesion():
 			break
 		else: # Opcion incorrecta
 			print "Opcion incorrecta"
+			# Mensaje de salida y detener pantalla
+			variable =  raw_input("\t\tPresione una <ENTER> para salir de la sesion...")
 
 # Dara de alta a un profesor
 def ingresarProfesor():
@@ -186,45 +188,95 @@ def ingresarProfesor():
 		# Mensaje de salida y detener pantalla
 		variable = raw_input("\n\n\tPresione en <ENTER> para continuar...")
 	else:
-		# Verificar si existe esa matricual (Profesor)
-		querybuscarMaestro = "SELECT Nombre, ApellidoPaterno FROM PROFESOR WHERE Matricula = %s" % Matricula
-		# Ejecutamos la instruccion
-		runQueryIngresarMaestro = run_query(querybuscarMaestro)
-		# Si no la encuentra...
-		if not runQueryIngresarMaestro:
-			# Mostrar mensaje
-			print "\n\n\tLa matricula \"",Matricula,"\" no existe. Intentelo de nuevo."
+		# Ingresar la posicion
+		Lugar = raw_input("\n\t\tIngrese el numero de estacionamiento: ")
+		# Validar que el dato sea numero
+		if ValidarInt(Lugar):
+			print "\n\t\tSolo se pueden ingresar numeros. Intente de nuevo."
 			# Mensaje de salida y detener pantalla
-			variable =  raw_input("\n\n\tPresione en <ENTER> para continuar...")
+			variable = raw_input("\n\n\tPresione en <ENTER> para continuar...")
 		else:
-			# Buscar la misma Matricula
-			queryBuscarDuplicado = "SELECT IdMatriculaOcupado FROM LUGAROCUPADO WHERE IdMatriculaOcupado = %s" % Matricula
-			# Correr la instruccion de arriba
-			runMatriculaRepetida = run_query(queryBuscarDuplicado)
-			# Si la encuentro...
-			if runMatriculaRepetida:
+			# Verificar si existe esa matricual (Profesor)
+			querybuscarMaestro = "SELECT Nombre, ApellidoPaterno FROM PROFESOR WHERE Matricula = %s" % Matricula
+			# Ejecutamos la instruccion
+			runQueryIngresarMaestro = run_query(querybuscarMaestro)
+			# Si no la encuentra...
+			if not runQueryIngresarMaestro:
 				# Mostrar mensaje
-				print "\n\n\tLa matricula \"",Matricula,"\" ya esta ingresada. Intentelo de nuevo con otra matricula."
+				print "\n\n\tLa matricula \"",Matricula,"\" no existe. Intentelo de nuevo."
 				# Mensaje de salida y detener pantalla
 				variable =  raw_input("\n\n\tPresione en <ENTER> para continuar...")
 			else:
-				# Ingresar el profesor en tabla de Ocupados
-				queryIngresarMaestro = "INSERT INTO LUGAROCUPADO (IdMatriculaOcupado) VALUES (%s)" % Matricula
+				# Buscamos el num de lugar
+				queryBuscarDuplicado = "SELECT IdMatriculaOcupado FROM LUGAROCUPADO WHERE IdMatriculaOcupado = %s" % Matricula
 				# Correr la instruccion de arriba
-				run_query(queryIngresarMaestro)
-				# Restar uno al tabla LugaresDisponibles
-				queryRestarEspacio = "UPDATE LugaresDisponibles SET Lugares = Lugares - 1 WHERE Espacio = 1"
-				 # Correr la instruccion de arriba
-				run_query(queryRestarEspacio)
-				# Mostrar el mensaje cuando sea correcto
-				print "\n\n\t\t*********************************************************************"
-				print "\t\t*    Se ha agregado correctamente la matricula \"",Matricula,"\".       *"
-				print "\t\t*********************************************************************"
-				# Mensaje de salida y detener pantalla
-				variable =  raw_input("\n\n\tPresione en <ENTER> para continuar...")
+				runMatriculaRepetida = run_query(queryBuscarDuplicado)
+				# Si la encuentro...
+				if runMatriculaRepetida:
+					# Mostrar mensaje
+					print "\n\n\tLa matricula \"",Matricula,"\" ya esta ingresada. Intentelo de nuevo con otra matricula."
+					# Mensaje de salida y detener pantalla
+					variable = raw_input("\n\n\tPresione en <ENTER> para continuar...")
+				else:
+					# Transformar de string a int
+					L = int(Lugar)
+					# Si es un menor a 1 y mayor a 40...
+					if not ( L >=1 and L <=40 ):
+						# Mostrar mensaje
+						print "\n\n\tEliga un lugar del 1 al 40. Intentelo de nuevo con otro lugar."
+						# Mensaje de salida y detener pantalla
+						variable = raw_input("\n\n\tPresione en <ENTER> para continuar...")
+					else:
+						# Buscamos el lugar si esta disponibles
+						queryBuscarLugar = "SELECT * FROM LUGAROCUPADO WHERE Lugar = %s" % Lugar
+						# Correr la instruccion de arriba
+						runLugarRepetido = run_query(queryBuscarLugar)
+						# Si encuentra el lugar
+						if runLugarRepetido:
+							# Mostrar mensaje
+							print "\n\n\tEl lugar que eligio ya esta en uso. Intentelo de nuevo con otro lugar."
+							# Mensaje de salida y detener pantalla
+							variable = raw_input("\n\n\tPresione en <ENTER> para continuar...")
+						else:
+							# Ingresar el profesor en tabla de Ocupados
+							queryIngresarMaestro = "INSERT INTO LUGAROCUPADO (IdMatriculaOcupado,Lugar) VALUES (%s, %s)" % (Matricula,Lugar)
+							# Correr la instruccion de arriba
+							run_query(queryIngresarMaestro)
+							# Restar uno al tabla LugaresDisponibles
+							queryRestarEspacio = "UPDATE LugaresDisponibles SET Lugares = Lugares - 1 WHERE Espacio = 1"
+							 # Correr la instruccion de arriba
+							run_query(queryRestarEspacio)
+							# Mostrar el mensaje cuando sea correcto
+							print "\n\n\t\t*********************************************************************"
+							print "\t\t*    Se ha agregado correctamente la matricula \"",Matricula,"\"            *"
+							print "\t\t*    al estacionamiento.                                            *"
+							print "\t\t*********************************************************************"
+							# Mensaje de salida y detener pantalla
+							variable =  raw_input("\n\n\tPresione en <ENTER> para continuar...")
 
 # Eliminar profesor
 def eliminarProfesor():
+	# Limpiar pantalla
+	Limpiar()
+	# Mostrar menu principal
+	pantallaMenu2()
+	print "\n\t\t\tIngrese de que forma en que desea desocupar el Lugar: "
+	print "\n\t1.- Matricula"
+	print "\t2.- Lugar Ocupado"
+	opcion = raw_input("\n\tOpcion: ")
+
+	if opcion == '1':
+		eliminarPorMatricula()
+	elif opcion == '2':
+		eliminarPorLugar()
+	else:
+		print "\nOpcion incorrecta."
+		# Mensaje de salida y detener pantalla
+		variable =  raw_input("\n\t\tPresione una <ENTER> para salir de la sesion...")
+	
+
+# Eliminar por matricula
+def eliminarPorMatricula():
 	# Limpiar pantalla
 	Limpiar()
 	# Mostrar menu principal
@@ -251,7 +303,7 @@ def eliminarProfesor():
 			variable =  raw_input("\n\n\tPresione en <ENTER> para continuar...")
 		else:
 			# Buscar la misma Matricula
-			queryBuscarDuplicado = "SELECT IdMatriculaOcupado, Entr FROM LUGAROCUPADO WHERE IdMatriculaOcupado = %s" % Matricula
+			queryBuscarDuplicado = "SELECT IdMatriculaOcupado, Entr, Lugar FROM LUGAROCUPADO WHERE IdMatriculaOcupado = %s" % Matricula
 			# Correr la instruccion de arriba
 			runMatriculaRepetida = run_query(queryBuscarDuplicado)
 			# Si no la encuentra...
@@ -273,16 +325,68 @@ def eliminarProfesor():
 				for row in runMatriculaRepetida:
 					matri = row[0]
 					entr = row[1]
+					pos = row[2]
 				# Query para actulizar
-				queryActulizar = "INSERT INTO REGISTRO (IdMatricula, Entrada) VALUES ('%s', '%s')" % (matri, entr)
+				queryActulizar = "INSERT INTO REGISTRO (IdMatricula, Entrada, Lugar) VALUES ('%s', '%s', '%s')" % (matri, entr, pos)
 				# Correr la instruccion de arriba
 				run_query(queryActulizar)
 				# Mostrar el mensaje cuando sea correcto
 				print "\n\n\t\t*********************************************************************"
-				print "\t\t*    Se ha quitado correctamente la matricula \"",Matricula,"\".       *"
+				print "\t\t*    Se ha quitado correctamente el profeosr del estacionamiento.     *"
 				print "\t\t*********************************************************************"
 				# Mensaje de salida y detener pantalla
 				variable =  raw_input("\n\n\tPresione en <ENTER> para continuar...")
+
+# Eliminar por Lugar
+def eliminarPorLugar():
+	# Limpiar pantalla
+	Limpiar()
+	# Mostrar menu principal
+	pantallaMenu2()
+	# Mensaje de ingresar datos
+	print "\nIngrese los siguientes datos: "
+	# Ingresar la matricula
+	Lugar = raw_input("\n\t\tIngrese el Lugar del profesor: ")
+	# Validar que el dato sea numero
+	if ValidarInt(Lugar):
+		print "\n\t\tSolo se pueden ingresar numeros. Intente de nuevo."
+		# Mensaje de salida y detener pantalla
+		variable = raw_input("\n\n\tPresione en <ENTER> para continuar...")
+	else:
+		# Verificar si existe ese lugar
+		querybuscarLugar = "SELECT IdMatriculaOcupado, Entr, Lugar FROM LUGAROCUPADO WHERE Lugar = %s" % Lugar
+		# Ejecutamos la instruccion
+		runQueryIngresarLugar = run_query(querybuscarLugar)
+		# Si no la encuentra...
+		if not runQueryIngresarLugar:
+			# Mostrar mensaje
+			print "\n\n\tEl lugar \"" + Lugar + "\" esta disponible. Intente con otro lugar."
+			# Mensaje de salida y detener pantalla
+			variable =  raw_input("\n\n\tPresione en <ENTER> para continuar...")
+		else:
+			# Ingresar el profesor en tabla de Ocupados
+			queryIngresarMaestro = "DELETE FROM LUGAROCUPADO WHERE Lugar = (%s)" % Lugar
+			# Correr la instruccion de arriba
+			run_query(queryIngresarMaestro)
+			# Suma uno al tabla LugaresDisponibles
+			queryRestarEspacio = "UPDATE LugaresDisponibles SET Lugares = Lugares + 1 WHERE Espacio = 1"
+			# Correr la instruccion de arriba
+			run_query(queryRestarEspacio)
+			# Actualizar datos
+			for row in runQueryIngresarLugar:
+				matri = row[0]
+				entr = row[1]
+				pos = row[2]
+			# Query para actulizar
+			queryActulizar = "INSERT INTO REGISTRO (IdMatricula, Entrada, Lugar) VALUES ('%s', '%s', '%s')" % (matri, entr, pos)
+			# Correr la instruccion de arriba
+			run_query(queryActulizar)
+			# Mostrar el mensaje cuando sea correcto
+			print "\n\n\t\t*********************************************************************"
+			print "\t\t*    Se ha desocupado correctamente el lugar "+Lugar+".               *"
+			print "\t\t*********************************************************************"
+			# Mensaje de salida y detener pantalla
+			variable =  raw_input("\n\n\tPresione en <ENTER> para continuar...")
 
 # Mostrar los profesores que estan ingresados
 def mostrarProfesores():
@@ -291,13 +395,13 @@ def mostrarProfesores():
 	# Mostrar menu principal
 	pantallaMenu3()
 	# Seleccionar en los profesores
-	queryMostrarProfesores = "SELECT LUGAROCUPADO.IdMatriculaOcupado, PROFESOR.Matricula, PROFESOR.Nombre, PROFESOR.ApellidoPaterno, DATE_FORMAT(LUGAROCUPADO.Entr, '%e %M') AS Fecha, DATE_FORMAT(LUGAROCUPADO.Entr, '%H:%i') AS Hora FROM LUGAROCUPADO,PROFESOR WHERE LUGAROCUPADO.IdMatriculaOcupado = PROFESOR.Matricula"
+	queryMostrarProfesores = "SELECT LUGAROCUPADO.IdMatriculaOcupado, PROFESOR.Matricula, PROFESOR.Nombre, PROFESOR.ApellidoPaterno, DATE_FORMAT(LUGAROCUPADO.Entr, '%e %M') AS Fecha, DATE_FORMAT(LUGAROCUPADO.Entr, '%H:%i') AS Hora, LUGAROCUPADO.Lugar FROM LUGAROCUPADO,PROFESOR WHERE LUGAROCUPADO.IdMatriculaOcupado = PROFESOR.Matricula"
 	# Correr la instruccion anterior
 	runQueryMostrarOcupados = run_query(queryMostrarProfesores)
 	# Mostrar tabla
-	print "\n\n/+++++++++++++|+++++++++++++++|+++++++++++++++++++++|+++++++++++++++++|+++++++++++++++++++++++++++++++++\\"
-	print "|Matricula\tNombre\t\tApellido\t\tHora\t\tFecha "
-	print "|+++++++++++++|+++++++++++++++|+++++++++++++++++++++|+++++++++++++++++|+++++++++++++++++++++++++++++++++\\"
+	print "\n\n/+++++++++++++|+++++++++++++++|+++++++++++++++++++++|+++++++++++++++++|++++++++++++++++|++++++++++++++++\\"
+	print "|Matricula\tNombre\t\tApellido\t\tHora\t\tFecha\t\tLugar"
+	print "|+++++++++++++|+++++++++++++++|+++++++++++++++++++++|+++++++++++++++++|++++++++++++++++|++++++++++++++++\\"
 	# Mostrar los datos
 	for row in runQueryMostrarOcupados:
 		matri = row[0]
@@ -306,7 +410,8 @@ def mostrarProfesores():
 		ape = row[3]
 		fecha = row[4]
 		hora = row[5]
-		print "| %s \t%s \t\t%s \t\t\t%s \t\t%s" % (matri,nom,ape,hora,fecha)
+		l = row[6]
+		print "| %s \t%s \t\t%s \t\t\t%s \t\t%s \t%s" % (matri,nom,ape,hora,fecha,l)
 	# Imprimir marco
 	print "\\+++++++++++++|+++++++++++++++|+++++++++++++++++++++|+++++++++++++++++|+++++++++++++++++++++++++++++++++/"
 	# Mensaje de salida y detener pantalla
@@ -319,13 +424,13 @@ def mostrarRegistro():
 	# Mostrar menu principal
 	pantallaMenu4()
 	# Seleccionar en los profesores
-	queryMostrarProfesores = "SELECT REGISTRO.IdMatricula, PROFESOR.Matricula, PROFESOR.Nombre, PROFESOR.ApellidoPaterno, DATE_FORMAT(REGISTRO.Entrada, '%e %M') AS FechaLlegada, DATE_FORMAT(REGISTRO.Entrada, '%H:%i') AS HoraLlegada, DATE_FORMAT(REGISTRO.Salida, '%e %M') AS FechaSalida, DATE_FORMAT(REGISTRO.Salida, '%H:%i') AS HoraSalida FROM REGISTRO,PROFESOR WHERE REGISTRO.IdMatricula = PROFESOR.Matricula"
+	queryMostrarProfesores = "SELECT REGISTRO.IdMatricula, PROFESOR.Matricula, PROFESOR.Nombre, PROFESOR.ApellidoPaterno, DATE_FORMAT(REGISTRO.Entrada, '%e %M') AS FechaLlegada, DATE_FORMAT(REGISTRO.Entrada, '%H:%i') AS HoraLlegada, DATE_FORMAT(REGISTRO.Salida, '%e %M') AS FechaSalida, DATE_FORMAT(REGISTRO.Salida, '%H:%i') AS HoraSalida, REGISTRO.Lugar FROM REGISTRO,PROFESOR WHERE REGISTRO.IdMatricula = PROFESOR.Matricula"
 	# Correr la instruccion anterior
 	runQueryMostrarOcupados = run_query(queryMostrarProfesores)
 	# Mostrar tabla
-	print "\n\n/+++++++++++++|+++++++|++++++++++++|++++++++++++++++++|+++++++++++++++|+++++++++++++++|+++++++++++++++++++\\"
-	print "|Matricula\tNombre\tApellido\tFechaLlegada\tHoraLlegada\tFechaSalida\tHoraSalida"
-	print "|+++++++++++++|+++++++|++++++++++++|++++++++++++++++++|+++++++++++++++|+++++++++++++++|+++++++++++++++++++\\"
+	print "\n\n/+++++++++++++|+++++++|++++++++++++|++++++++++++++++++|+++++++++++++++|+++++++++++++++|++++++++++++|++++++\\"
+	print "|Matricula\tNombre\tApellido\tFechaLlegada\tHoraLlegada\tFechaSalida\tHoraSalida     L"
+	print "|+++++++++++++|+++++++|++++++++++++|++++++++++++++++++|+++++++++++++++|+++++++++++++++|++++++++++++|++++++\\"
 	# Mostrar los datos
 	for row in runQueryMostrarOcupados:
 		matri = row[0]
@@ -336,9 +441,10 @@ def mostrarRegistro():
 		horaLlegada = row[5]
 		fechaSalida = row[6]
 		horaSalida = row[7]
-		print "|  %s \t%s \t%s \t\t%s \t%s \t\t%s \t%s" % (matri,nom,ape,fechaLlegada,horaLlegada,fechaSalida,horaSalida)
+		pos = row[8]
+		print "|  %s \t%s \t%s \t\t%s \t%s \t\t%s \t%s         %s" % (matri,nom,ape,fechaLlegada,horaLlegada,fechaSalida,horaSalida, pos)
 	# Imprimir marco
-	print "\+++++++++++++|+++++++|++++++++++++|++++++++++++++++++|+++++++++++++++|+++++++++++++++|+++++++++++++++++++/"
+	print "\+++++++++++++|+++++++|++++++++++++|++++++++++++++++++|+++++++++++++++|+++++++++++++++|++++++++++++|++++++/"
 	# Mensaje de salida y detener pantalla
 	variable =  raw_input("\n\n\tPresione en <ENTER> para continuar...")
 

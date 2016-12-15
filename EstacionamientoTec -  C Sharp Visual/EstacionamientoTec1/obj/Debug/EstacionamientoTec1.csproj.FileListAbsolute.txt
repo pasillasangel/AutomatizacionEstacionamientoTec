@@ -1,0 +1,42 @@
+c:\users\andrea\documents\visual studio 2013\Projects\EstacionamientoTec1\EstacionamientoTec1\bin\Debug\EstacionamientoTec1.exe.config
+c:\users\andrea\documents\visual studio 2013\Projects\EstacionamientoTec1\EstacionamientoTec1\bin\Debug\EstacionamientoTec1.exe
+c:\users\andrea\documents\visual studio 2013\Projects\EstacionamientoTec1\EstacionamientoTec1\bin\Debug\EstacionamientoTec1.pdb
+c:\users\andrea\documents\visual studio 2013\Projects\EstacionamientoTec1\EstacionamientoTec1\obj\Debug\EstacionamientoTec1.csprojResolveAssemblyReference.cache
+c:\users\andrea\documents\visual studio 2013\Projects\EstacionamientoTec1\EstacionamientoTec1\obj\Debug\EstacionamientoTec1.Form1.resources
+c:\users\andrea\documents\visual studio 2013\Projects\EstacionamientoTec1\EstacionamientoTec1\obj\Debug\EstacionamientoTec1.Form2.resources
+c:\users\andrea\documents\visual studio 2013\Projects\EstacionamientoTec1\EstacionamientoTec1\obj\Debug\EstacionamientoTec1.Form3.resources
+c:\users\andrea\documents\visual studio 2013\Projects\EstacionamientoTec1\EstacionamientoTec1\obj\Debug\EstacionamientoTec1.Properties.Resources.resources
+c:\users\andrea\documents\visual studio 2013\Projects\EstacionamientoTec1\EstacionamientoTec1\obj\Debug\EstacionamientoTec1.csproj.GenerateResource.Cache
+c:\users\andrea\documents\visual studio 2013\Projects\EstacionamientoTec1\EstacionamientoTec1\obj\Debug\EstacionamientoTec1.exe
+c:\users\andrea\documents\visual studio 2013\Projects\EstacionamientoTec1\EstacionamientoTec1\obj\Debug\EstacionamientoTec1.pdb
+C:\Users\Andrea\Documents\Visual Studio 2013\Projects\EstacionamientoTec1\EstacionamientoTec1\obj\Debug\EstacionamientoTec1.Form4.resources
+C:\Users\anthon\Documents\DBA-Mysql\EstacionamientoTec1\EstacionamientoTec1\bin\Debug\EstacionamientoTec1.exe.config
+C:\Users\anthon\Documents\DBA-Mysql\EstacionamientoTec1\EstacionamientoTec1\obj\Debug\EstacionamientoTec1.exe
+C:\Users\anthon\Documents\DBA-Mysql\EstacionamientoTec1\EstacionamientoTec1\obj\Debug\EstacionamientoTec1.pdb
+C:\Users\anthon\Documents\DBA-Mysql\EstacionamientoTec1\EstacionamientoTec1\bin\Debug\EstacionamientoTec1.exe
+C:\Users\anthon\Documents\DBA-Mysql\EstacionamientoTec1\EstacionamientoTec1\bin\Debug\EstacionamientoTec1.pdb
+C:\Users\anthon\Documents\DBA-Mysql\EstacionamientoTec1\EstacionamientoTec1\obj\Debug\EstacionamientoTec1.csprojResolveAssemblyReference.cache
+C:\Users\anthon\Documents\DBA-Mysql\EstacionamientoTec1\EstacionamientoTec1\obj\Debug\EstacionamientoTec1.Form1.resources
+C:\Users\anthon\Documents\DBA-Mysql\EstacionamientoTec1\EstacionamientoTec1\obj\Debug\EstacionamientoTec1.Form2.resources
+C:\Users\anthon\Documents\DBA-Mysql\EstacionamientoTec1\EstacionamientoTec1\obj\Debug\EstacionamientoTec1.Form3.resources
+C:\Users\anthon\Documents\DBA-Mysql\EstacionamientoTec1\EstacionamientoTec1\obj\Debug\EstacionamientoTec1.Form4.resources
+C:\Users\anthon\Documents\DBA-Mysql\EstacionamientoTec1\EstacionamientoTec1\obj\Debug\EstacionamientoTec1.Properties.Resources.resources
+C:\Users\anthon\Documents\DBA-Mysql\EstacionamientoTec1\EstacionamientoTec1\obj\Debug\EstacionamientoTec1.csproj.GenerateResource.Cache
+C:\Users\anthon\Documents\DBA-Mysql\EstacionamientoTec1\EstacionamientoTec1\obj\Debug\EstacionamientoTec1.Form5.resources
+C:\Users\anthon\Documents\DBA-Mysql\EstacionamientoTec1\EstacionamientoTec1\obj\Debug\EstacionamientoTec1.Form6.resources
+C:\Users\Angel Pasillas\Desktop\EstacionamientoTec1\EstacionamientoTec1\bin\Debug\EstacionamientoTec1.exe.config
+C:\Users\Angel Pasillas\Desktop\EstacionamientoTec1\EstacionamientoTec1\obj\Debug\EstacionamientoTec1.exe
+C:\Users\Angel Pasillas\Desktop\EstacionamientoTec1\EstacionamientoTec1\obj\Debug\EstacionamientoTec1.pdb
+C:\Users\Angel Pasillas\Desktop\EstacionamientoTec1\EstacionamientoTec1\bin\Debug\EstacionamientoTec1.exe
+C:\Users\Angel Pasillas\Desktop\EstacionamientoTec1\EstacionamientoTec1\bin\Debug\EstacionamientoTec1.pdb
+C:\Users\Angel Pasillas\Desktop\EstacionamientoTec1\EstacionamientoTec1\bin\Debug\MySql.Data.dll
+C:\Users\Angel Pasillas\Desktop\EstacionamientoTec1\EstacionamientoTec1\bin\Debug\MySql.Data.xml
+C:\Users\Angel Pasillas\Desktop\EstacionamientoTec1\EstacionamientoTec1\obj\Debug\EstacionamientoTec1.csprojResolveAssemblyReference.cache
+C:\Users\Angel Pasillas\Desktop\EstacionamientoTec1\EstacionamientoTec1\obj\Debug\EstacionamientoTec1.Form1.resources
+C:\Users\Angel Pasillas\Desktop\EstacionamientoTec1\EstacionamientoTec1\obj\Debug\EstacionamientoTec1.Form2.resources
+C:\Users\Angel Pasillas\Desktop\EstacionamientoTec1\EstacionamientoTec1\obj\Debug\EstacionamientoTec1.Form3.resources
+C:\Users\Angel Pasillas\Desktop\EstacionamientoTec1\EstacionamientoTec1\obj\Debug\EstacionamientoTec1.Form4.resources
+C:\Users\Angel Pasillas\Desktop\EstacionamientoTec1\EstacionamientoTec1\obj\Debug\EstacionamientoTec1.Form5.resources
+C:\Users\Angel Pasillas\Desktop\EstacionamientoTec1\EstacionamientoTec1\obj\Debug\EstacionamientoTec1.Form6.resources
+C:\Users\Angel Pasillas\Desktop\EstacionamientoTec1\EstacionamientoTec1\obj\Debug\EstacionamientoTec1.Properties.Resources.resources
+C:\Users\Angel Pasillas\Desktop\EstacionamientoTec1\EstacionamientoTec1\obj\Debug\EstacionamientoTec1.csproj.GenerateResource.Cache
